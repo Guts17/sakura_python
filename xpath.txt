@@ -1,0 +1,17 @@
+查看所有动画页面:http://www.imomoe.io/so.asp
+获取所有动画li：//div[@class="fire l"]//div[@class="pics"]//li
+获取分页：//div[@class='pages']//a[1]	（下一页）
+
+动画详情：
+名称：response.xpath('//div[@class="spay"]/a/text()').extract()
+别名：//div[@class="alex"]//p[1]
+更新信息：//div[@class="alex"]//p[2]
+地区：response.xpath('//div[@class="alex"]//span[1]/a/text()').extract_first()
+类型：response.xpath('//div[@class="alex"]//span[2]/a/text()').extract()
+年代：response.xpath('//div[@class="alex"]//span[3]/a/text()').extract_first()
+标签：response.xpath('//div[@class="alex"]//span[4]/a/text()').extract()
+索引：response.xpath('//div[@class="alex"]//span[5]/a/text()').extract_first()
+
+剧集：
+所有剧集页面：//div[@class="movurl"]//li//a//@href
+剧集js：response.xpath('//div[@class="player"]/script[1]/@src').extract_first()
