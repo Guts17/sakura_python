@@ -51,7 +51,7 @@ class SakuraSpider(scrapy.Spider):
         first_episodeUrl = response.urljoin(first_episodeUrl)
         request1 = scrapy.Request(first_episodeUrl, callback=self.parse_episodes)
         request1.meta["videoitem"] = videoitem
-        yield request1
+        yield request1  
 
         # yield videoitem
 

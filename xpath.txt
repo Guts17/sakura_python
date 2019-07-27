@@ -11,6 +11,7 @@
 年代：response.xpath('//div[@class="alex"]//span[3]/a/text()').extract_first()
 标签：response.xpath('//div[@class="alex"]//span[4]/a/text()').extract()
 索引：response.xpath('//div[@class="alex"]//span[5]/a/text()').extract_first()
+图片；response.xpath('//div[@class="tpic l"]/img/@src').extract_first()
 
 剧集：
 所有剧集页面：//div[@class="movurl"]//li//a//@href
