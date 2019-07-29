@@ -22,6 +22,9 @@ class VideoItem(scrapy.Item):
     video_desc = scrapy.Field()
     video_detailurl = scrapy.Field()
     video_episodeurl = scrapy.Field()
+    video_picurl = scrapy.Field()
+    image_urls = scrapy.Field()
+    images = scrapy.Field()
     
 
 class VideoEpisodeItem(scrapy.Item):

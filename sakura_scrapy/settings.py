@@ -93,13 +93,16 @@ FEED_EXPORT_FIELDS = ['video_id', 'video_name', 'video_aliasname', 'video_region
                       'video_type', 'video_years', 'video_tag', 'video_index', 'video_desc', 'video_detailurl', 'video_episodeurl']
 
 ITEM_PIPELINES = {
-    'sakura_scrapy.pipelines.MySQLPipeline': 300
     # 'sakura_scrapy.pipelines.MongoDBPipeline': 300
+    # 'scrapy.pipelines.images.ImagesPipeline':1,
+    'sakura_scrapy.pipelines.VideoPicPipeline': 1,
+    'sakura_scrapy.pipelines.MySQLPipeline': 300,
 }
 
 MYSQL_HOST = '127.0.0.1'
 MYSQL_PORT = '3306'
-MYSQL_DB_NAME = 'sakura'
+MYSQL_DB_NAME = 'sakura1'
 MYSQL_USER = 'root'
 MYSQL_PASSWORD = 'lsq123456'
 
+IMAGES_STORE = '../../sakura_imgs'

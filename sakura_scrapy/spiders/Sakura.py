@@ -46,6 +46,8 @@ class SakuraSpider(scrapy.Spider):
         videoitem['video_index'] = response.xpath('//div[@class="alex"]//span[5]/a/text()').extract_first()
         videoitem['video_desc'] = response.xpath('//div[@class="info"]/text()').extract_first()
         videoitem['video_detailurl'] = baseurl
+        videoitem['video_picurl'] = response.xpath('//div[@class="tpic l"]/img/@src').extract_first()
+        videoitem['image_urls'] = [videoitem['video_picurl']]
 
         first_episodeUrl = response.xpath('//div[@class="movurl"]//li//a//@href').extract_first()
         first_episodeUrl = response.urljoin(first_episodeUrl)

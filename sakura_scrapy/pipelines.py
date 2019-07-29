@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 
+from scrapy.pipelines.images import ImagesPipeline
 import codecs
 import json
 import pymongo
-import pymysql
+import pymysql 
 from twisted.enterprise import adbapi
+from scrapy.http import Request
+
 
 
 # Define your item pipelines here
@@ -53,7 +56,7 @@ class MongoDBPipeline(object):
 
 class MySQLPipeline:
     def open_spider(self, spider):
-        db = spider.settings.get('MYSQL_DB_NAME', 'sakura')
+        db = spider.settings.get('MYSQL_DB_NAME', 'sakura1')
         host = spider.settings.get('MYSQL_HOST', 'localhost')
         #port = spider.settings.get('MYSQL_PORT', 3306)
         user = spider.settings.get('MYSQL_USER', 'root')
@@ -103,7 +106,17 @@ class MySQLPipeline:
             item['video_index'],
             item['video_desc'],
             item['video_detailurl'],
-            item['video_episodeurl']
+            item['video_episodeurl'],
+            item['video_picurl']
         )
-        sql = 'INSERT INTO video VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'
+        sql = 'INSERT INTO video VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'
         tx.execute(sql, values)
+
+class VideoPicPipeline(ImagesPipeline):
+    def get_media_requests(self, item, info):
+        return [Request(x,meta={'videoitem':item}) for x in item.get(self.images_urls_field, [])]
+    def file_path(self, request, response=None, info=None):
+        videoitem = request.meta["videoitem"]
+        img_id = videoitem['video_id']
+        img_region = videoitem['video_region']
+        return 'test/%s/%s.jpg' % (img_region,img_id)
